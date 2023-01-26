@@ -6,7 +6,6 @@ public class Solution2 {
 
         String a = "11";
         String b = "1";
-
         System.out.println(addBinary(a, b));
 
     }
@@ -18,8 +17,9 @@ public class Solution2 {
         Stack<Character> bStack = new Stack<>();
 
         Stack<Character> aPlusBStack = new Stack<>();
-        char prev = '0';
 
+
+        //When a.length() > b.length()
         if (a.length() > b.length()) {
             for (char c : aChar) {
                 aStack.push(c);
@@ -34,6 +34,7 @@ public class Solution2 {
             }
         }
 
+        //When b.length() > a.length()
         if (b.length() > a.length()) {
             for (char c : bChar) {
                 bStack.push(c);
@@ -48,19 +49,40 @@ public class Solution2 {
             }
         }
 
+        //When a == b
+        if (a.length() == b.length()) {
+            for (char c : aChar) {
+                aStack.push(c);
+            }
+
+            for (char c : bChar) {
+                bStack.push(c);
+            }
+        }
+
+        boolean isOne = false;
+        //Add Binary
         for (int i = 0; i < aStack.size(); i++) {
 
-            if (prev == '0' && aStack.pop() == '1' && bStack.pop() == '1') {
-                aPlusBStack.push('0');
-                prev = '1';
+            //1010
+            //1011
+            char aValue = aStack.pop();
+            char bValue = bStack.pop();
+
+            switch (aValue) {
+                case '1':
+                    if (bValue == '1' && !isOne) {
+                        aStack.push('0');
+                        isOne = true;
+                    }
+                    //TODO
             }
 
-            if (prev == '1' && aStack.pop() == '1' && bStack.pop() == '0') {
-                aPlusBStack.push('0');
-            }
 
-            if (i == aStack.size()) {
-                aPlusBStack.push(prev);
+            if (i == aStack.size() && isOne) {
+                aPlusBStack.push('1');
+            } else {
+                aPlusBStack.push('0');
             }
         }
 
