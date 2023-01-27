@@ -4,8 +4,8 @@ import java.util.Stack;
 public class Solution2 {
     public static void main(String[] args) {
 
-        String a = "11";
-        String b = "1";
+        String a = "1111";
+        String b = "1111";
         System.out.println(addBinary(a, b));
 
     }
@@ -60,30 +60,59 @@ public class Solution2 {
             }
         }
 
+
         boolean isOne = false;
         //Add Binary
-        for (int i = 0; i < aStack.size(); i++) {
+        int plus = 0;
 
+        if (aStack.size() > 2) {
+            plus = 2;
+        }
+        for (int i = 0; i <= aStack.size() + plus; i++) {
             //1010
             //1011
+            //Explanation: https://www.youtube.com/watch?v=uTUqwjCiTwA&t=91s
             char aValue = aStack.pop();
             char bValue = bStack.pop();
 
             switch (aValue) {
-                case '1':
-                    if (bValue == '1' && !isOne) {
-                        aStack.push('0');
-                        isOne = true;
+                case '0':
+                    if (!isOne && bValue == '0') {
+                        aPlusBStack.push('0');
+                        break;
+                    } else if (!isOne && bValue == '1') {
+                        aPlusBStack.push('1');
+                        break;
+                    } else if (isOne && bValue == '0') {
+                        aPlusBStack.push('1');
+                        isOne = false;
+                        break;
+                    } else if (isOne && bValue == '1') {
+                        aPlusBStack.push('0');
+                        break;
                     }
-                    //TODO
+                case '1':
+                    if (!isOne && bValue == '1') {
+                        aPlusBStack.push('0');
+                        isOne = true;
+                        break;
+                    } else if (!isOne && bValue == '0') {
+                        aPlusBStack.push('1');
+                        break;
+                    } else if (isOne && bValue == '1') {
+                        aPlusBStack.push('0');
+                        isOne = true;
+                        break;
+                    } else if (isOne && bValue == '0') {
+                        aPlusBStack.push('0');
+                        break;
+                    }
             }
 
+        }
 
-            if (i == aStack.size() && isOne) {
-                aPlusBStack.push('1');
-            } else {
-                aPlusBStack.push('0');
-            }
+        if (isOne) {
+            aPlusBStack.push('1');
         }
 
         char[] result = new char[aPlusBStack.size()];
