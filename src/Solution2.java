@@ -1,11 +1,10 @@
-import java.util.Arrays;
 import java.util.Stack;
 
 public class Solution2 {
     public static void main(String[] args) {
 
-        String a = "1111";
-        String b = "1111";
+        String a = "11";
+        String b = "1";
         System.out.println(addBinary(a, b));
 
     }
@@ -60,15 +59,10 @@ public class Solution2 {
             }
         }
 
-
         boolean isOne = false;
-        //Add Binary
-        int plus = 0;
 
-        if (aStack.size() > 2) {
-            plus = 2;
-        }
-        for (int i = 0; i <= aStack.size() + plus; i++) {
+        //Add Binary
+        while (!aStack.isEmpty()) {
             //1010
             //1011
             //Explanation: https://www.youtube.com/watch?v=uTUqwjCiTwA&t=91s
@@ -100,11 +94,12 @@ public class Solution2 {
                         aPlusBStack.push('1');
                         break;
                     } else if (isOne && bValue == '1') {
-                        aPlusBStack.push('0');
+                        aPlusBStack.push('1');
                         isOne = true;
                         break;
                     } else if (isOne && bValue == '0') {
                         aPlusBStack.push('0');
+                        isOne = true;
                         break;
                     }
             }
