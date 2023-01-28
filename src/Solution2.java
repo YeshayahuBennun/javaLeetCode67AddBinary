@@ -65,7 +65,6 @@ public class Solution2 {
         while (!aStack.isEmpty()) {
             //1010
             //1011
-            //Explanation: https://www.youtube.com/watch?v=uTUqwjCiTwA&t=91s
             char aValue = aStack.pop();
             char bValue = bStack.pop();
 
