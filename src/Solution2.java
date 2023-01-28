@@ -63,8 +63,6 @@ public class Solution2 {
 
         //Add Binary
         while (!aStack.isEmpty()) {
-            //1010
-            //1011
             char aValue = aStack.pop();
             char bValue = bStack.pop();
 
